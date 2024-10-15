@@ -1,4 +1,4 @@
-module FSM(clock, start, reset, count, entry, done);
+module FSM(clock, start, reset, count, entry, load_matrix, done);
 
 // Inputs
 input clock;
@@ -6,8 +6,8 @@ input start;
 input reset;
 
 // Outputs 
-output reg [2:0] count
-output load_matrix;
+output reg [2:0] count;
+output reg load_matrix;
 output reg [1:0] entry;
 output reg done;
 
@@ -26,9 +26,8 @@ always@(posedge clock)
 	current_state <= next_state;
 
 // Next state prediction
-always@(posedge clock, reset, start) begin 
+always@(posedge clock, posedge reset, posedge start) begin 
 
-	// TODO: point of entry
 	if(reset)
 		next_state <= Idle;
 	
