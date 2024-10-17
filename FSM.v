@@ -6,9 +6,9 @@ input start;
 input reset;
 
 // Outputs 
-output reg [2:0] count;
+output reg [3:0] count;
 output reg load_matrix;
-output reg [1:0] entry;
+output reg [2:0] entry;
 output reg done;
 
 // Variables (memory)
