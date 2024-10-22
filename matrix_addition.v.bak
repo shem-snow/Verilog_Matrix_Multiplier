@@ -1,6 +1,6 @@
 module matrix_addition(
 	input [63:0] matrix,
-	output reg [31:0] matrix_result
+	output [31:0] matrix_result
 );
 
 always @(*) begin

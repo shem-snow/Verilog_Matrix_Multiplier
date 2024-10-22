@@ -8,7 +8,7 @@ always@(*) begin
 	if(reset) begin
 		writeAddress = 0;
 	end else begin
-		writeAddress = address;
+		writeAddress = addresss;
 	end
 end
 

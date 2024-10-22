@@ -2,7 +2,7 @@ module MatrixB(
 	input [11:0] matrixB,
 	input write,
 	input [2:0] entry_out,
-	output [2:0] element
+	output reg [2:0] element
 );
 
 	always@(entry_out) begin

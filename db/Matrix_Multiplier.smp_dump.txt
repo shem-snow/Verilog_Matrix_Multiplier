@@ -1,0 +1,7 @@
+
+State Machine - |FSM|current_state
+Name current_state.Store current_state.Accumulate current_state.Multiply current_state.Idle 
+current_state.Idle 0 0 0 0 
+current_state.Multiply 0 0 1 1 
+current_state.Accumulate 0 1 0 1 
+current_state.Store 1 0 0 1 
