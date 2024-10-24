@@ -1,4 +1,4 @@
-module FSM(clock, start, reset, count, entry, load_matrix, done);
+module FSM(clock, start, reset, entry_count, add, load_matrix, done);
 
 // Inputs
 input clock;
@@ -6,9 +6,9 @@ input start;
 input reset;
 
 // Outputs 
-output reg [3:0] count;
+output reg [3:0] entry_count;
 output reg load_matrix;
-output reg [2:0] entry;
+output reg add;
 output reg done;
 
 // Variables (memory)
@@ -41,17 +41,14 @@ always@(posedge clock, posedge reset, posedge start) begin
 			end
 		
 			Multiply: begin
-				if(count == 4'b1000) // 8
+				if(entry_count == 4'b1000) // 8
 					next_state <= Accumulate;
 				else
 					; // latch
 			end
 		
 			Accumulate: begin
-				if(entry == 3'b100) // 4
-					next_state <= Store;
-				else
-					; // latch
+				next_state <= Store;
 			end
 		
 			Store: begin
@@ -73,37 +70,37 @@ always@(posedge clock) begin
 	
 	case(current_state)
 		Idle: begin
-			count <= 1'b0;
+			entry_count <= 1'b0;
 			load_matrix <= 1'b0;
-			entry <= 1'b0;
+			add <= 1'b0;
 			done <= 1'b0;
 		end
 		
 		Multiply: begin
-			count <= count + 1'b1;
+			entry_count <= entry_count + 1'b1;
 			load_matrix <= 1'b1;
-			entry <= 1'b0;
+			add <= 1'b0;
 			done <= 1'b0;
 		end
 		
 		Accumulate: begin
-			count <= 1'b0;
-			entry <= entry + 1'b1;
+			entry_count <= 1'b0;
+			add <= 1'b1;
 			load_matrix <= 1'b0;
 			done <= 1'b0;
 		end
 		
 		Store: begin
-			count <= 1'b0;
+			entry_count <= 1'b0;
 			load_matrix <= 1'b0;
-			entry <= 1'b0;
+			add <= 1'b0;
 			done <= 1'b1;
 		end
 		
 		default: begin
-			count <= 1'b0;
+			entry_count <= 1'b0;
 			load_matrix <= 1'b0;
-			entry <= 1'b0;
+			add <= 1'b0;
 			done <= 1'b0;
 		end
 		
