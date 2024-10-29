@@ -25,7 +25,7 @@ parameter Store = 2'b11;
 // State progression
 always@(posedge clock)
 	if(reset)
-		next_state <= Idle;
+		current_state <= Idle;
 	else
 	current_state <= next_state;
 
@@ -53,10 +53,7 @@ always@(current_state,entry_count) begin
 			end
 		
 			Store: begin
-				if(reset)
-					next_state = Idle;
-				else
-					; // latch
+				next_state <= Idle;
 			end
 		
 			default: begin
