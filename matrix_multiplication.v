@@ -1,5 +1,7 @@
 /*
 	This is our top-level module
+	Pretty sure this module does nothing now, as Matrix_multiplication is what
+	is called by the test bench. Delete this if true
 */
 module Matrix_multiplication(
 	input [15:0] matrix_A,

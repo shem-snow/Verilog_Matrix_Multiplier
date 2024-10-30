@@ -1,6 +1,8 @@
 module Multiplier #(
     parameter DATA_WIDTH = 4
 )
+//This does our necessary multiplication, turning the matrices to just be
+//the final number
 (	 
     input wire [DATA_WIDTH-1:0] in_mat1,
     input wire [DATA_WIDTH-1:0] in_mat2,
@@ -15,6 +17,8 @@ module Multiplier #(
 	  
 endmodule
 
+//I believe we're good to delete the below work. From my understanding the RTL generation will
+//create something, either a standard cell or bunch of logic gates, to handle our functional code.
 /*
  We're unsure if there is a standard cell that can handle multiplication directly. If there is then our current code is good.
  Otherwise we will use the following code to build a multiplier from logic gates. 

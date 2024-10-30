@@ -34,10 +34,10 @@ module RegFile(
   				3'd6: contents[55:48] = product_in;      // Assign to bits 48-55
     				3'd7: contents[63:56] = product_in;      // Assign to bits 56-63
    			 	default: contents = contents;            // Default case if needed
-endcase
+endcase				//Based on the reg_specifier, put the 8bits into the right spot
 
 	
-			end else begin
+			end else begin //basically dodging a latch warning
 				contents[63:56] = contents[63:56];
 				contents[55:48] = contents[55:48];
 				contents[47:40] = contents[47:40];

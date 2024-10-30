@@ -5,6 +5,9 @@ module result_handler(
 	output reg [31:0] Q,
 	output reg [7:0] address
 );
+	//This module handles where the final, post-multiplication result is stored
+	//Basically just counts through memory addresses and goes back to 0 on reset
+
 	// Note that this always block requires the reset to activate for the program to start.
 	always@(posedge reset, posedge done) begin
 		if(reset) begin

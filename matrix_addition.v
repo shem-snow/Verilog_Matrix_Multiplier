@@ -3,6 +3,8 @@ module matrix_addition(
 	output reg [31:0] matrix_result
 );
 
+//self explanatory but adds the values in the matrices and puts them into
+//the next matrix
 always @(*) begin
 	matrix_result[7:0] <= matrix[7:0] + matrix[15:8];
 	matrix_result[15:8] <=  matrix[31:24] + matrix[23:16];
