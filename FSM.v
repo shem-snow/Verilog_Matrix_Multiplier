@@ -14,7 +14,6 @@ output reg done;
 
 // Variables (memory)
 reg [1:0] current_state, next_state;
-reg running; // Means start happened
 
 // States
 parameter Idle = 2'b00;
@@ -30,7 +29,7 @@ always@(posedge clock)
 	current_state <= next_state;
 
 // Next state prediction
-always@(current_state,entry_count) begin 
+always@(current_state,entry_count,start) begin 
 
 		case(current_state)
 			Idle: begin

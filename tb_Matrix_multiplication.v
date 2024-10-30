@@ -18,19 +18,37 @@ Matrix_multiplication UUT(
 );
 
 initial begin
-clock = 0;
-forever #5 clock = ~clock;
+	clock = 0;
+	forever #5 clock = ~clock;
 end
 
 initial begin
-reset = 1;
-start = 0;
-matrix_A = 16'b0100001100100001;
-matrix_B = 16'b0001001000110100;
-repeat(1) @(posedge clock);
-reset = 0;
-start = 1;
-repeat (5) @(posedge clock);   // change the number in this line to fit with the expected time it is done 
+	reset = 1;
+	start = 0;
+	matrix_A = 16'b0100001100100001;
+	matrix_B = 16'b0001001000110100;
+	repeat(1) @(posedge clock);
+	reset = 0;
+	start = 1;
+	repeat (1) @(posedge clock);   
+	start = 0;
+	
+	// It takes 11 clock cycles to perform one matrix multiply
+	repeat(11) @(posedge clock);
+	
+	matrix_A = 16'b0110_0101_0100_0011;
+	matrix_B = 16'b1010_1001_1000_0111;
+	repeat(1) @(posedge clock);
+	reset = 0;
+	start = 1;
+	
+	repeat (2) @(posedge clock);   
+	start = 0;
+	
+	// It takes 11 clock cycles to perform one matrix multiply
+	repeat(12) @(posedge clock);
+	
+	
 end 
 
 endmodule
