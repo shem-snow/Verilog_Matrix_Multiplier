@@ -1,3 +1,7 @@
+/*
+	Same functionality as Matrix A but uses a case statement because we 
+	realised this is more concise.
+*/
 module MatrixB(
 	input clk,
 	input [15:0] matrixB,
