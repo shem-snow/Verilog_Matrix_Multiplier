@@ -18,8 +18,8 @@ Matrix_multiplication UUT(
 );
 
 initial begin
-	clock = 0;
-	forever #5 clock = ~clock;
+clock = 0;
+forever #5 clock = ~clock;
 end
 
 initial begin
@@ -36,9 +36,9 @@ initial begin
 	// It takes 11 clock cycles to perform one matrix multiply
 	repeat(11) @(posedge clock);
 	
-	matrix_A = 16'b0110_0101_0100_0011;
-	matrix_B = 16'b1010_1001_1000_0111;
-	repeat(1) @(posedge clock);
+	matrix_A = 16'b1001_0110_1000_0000;
+	matrix_B = 16'b1111_1111_0001_1010;
+	repeat(2) @(posedge clock);
 	reset = 0;
 	start = 1;
 	
@@ -46,7 +46,19 @@ initial begin
 	start = 0;
 	
 	// It takes 11 clock cycles to perform one matrix multiply
-	repeat(12) @(posedge clock);
+	repeat(11) @(posedge clock);
+
+	matrix_A = 16'b0110_0101_0100_0011;
+	matrix_B = 16'b1010_1001_1000_0111;
+	repeat(2) @(posedge clock);
+	reset = 0;
+	start = 1;
+	
+	repeat (2) @(posedge clock);   
+	start = 0;
+	
+	// It takes 11 clock cycles to perform one matrix multiply
+	repeat(11) @(posedge clock);
 	
 	
 end 

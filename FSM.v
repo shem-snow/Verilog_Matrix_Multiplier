@@ -3,8 +3,8 @@ module FSM(clock, start, reset, entry_count,multiply_matrix, load_matrix, add, d
 // Inputs
 input clock;
 input start;
-input reset; 
-input [3:0] entry_count; //the 4 positions of the 2x2 matrix
+input reset;
+input [3:0] entry_count;
 
 // Outputs 
 output reg multiply_matrix;
@@ -14,6 +14,7 @@ output reg done;
 
 // Variables (memory)
 reg [1:0] current_state, next_state;
+reg running; // Means start happened
 
 // States
 parameter Idle = 2'b00;
@@ -36,7 +37,7 @@ always@(current_state,entry_count,start) begin
 				if(start)
 					next_state <= Multiply;
 				else
-					 ;// latch //shouldn't this be next_state <= Idle; to avoid the latch?
+					 ;// latch
 			end
 		
 			Multiply: begin
@@ -62,7 +63,7 @@ always@(current_state,entry_count,start) begin
 end
 
 
-// Output driving	See our FSM diagram for a visual explanation
+// Output driving
 always@(current_state) begin
 	
 	case(current_state)
