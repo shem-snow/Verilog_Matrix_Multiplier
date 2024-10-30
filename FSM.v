@@ -1,12 +1,13 @@
-module FSM(clock, start, reset, entry_count, add, load_matrix, done);
+module FSM(clock, start, reset, entry_count,multiply_matrix, load_matrix, add, done);
 
 // Inputs
 input clock;
 input start;
 input reset;
+input [3:0] entry_count;
 
 // Outputs 
-output reg [3:0] entry_count;
+output reg multiply_matrix;
 output reg load_matrix;
 output reg add;
 output reg done;
@@ -23,28 +24,28 @@ parameter Store = 2'b11;
 
 // State progression
 always@(posedge clock)
+	if(reset)
+		current_state <= Idle;
+	else
 	current_state <= next_state;
 
 // Next state prediction
-always@(posedge clock, posedge reset, posedge start) begin 
+always@(current_state,entry_count) begin 
 
-	if(reset)
-		next_state <= Idle;
-	
-	else
 		case(current_state)
 			Idle: begin
 				if(start)
 					next_state <= Multiply;
 				else
-					; // latch
+					 ;// latch
 			end
 		
 			Multiply: begin
-				if(entry_count == 4'b1000) // 8
+				if(entry_count == 4'd7) begin // 8
 					next_state <= Accumulate;
-				else
-					; // latch
+				end else begin
+					 next_state <= Multiply;// latch
+				end
 			end
 		
 			Accumulate: begin
@@ -52,10 +53,7 @@ always@(posedge clock, posedge reset, posedge start) begin
 			end
 		
 			Store: begin
-				if(reset)
-					next_state = Idle;
-				else
-					; // latch
+				next_state <= Idle;
 			end
 		
 			default: begin
@@ -66,39 +64,38 @@ end
 
 
 // Output driving
-always@(posedge clock) begin
+always@(current_state) begin
 	
 	case(current_state)
 		Idle: begin
-			entry_count <= 1'b0;
+			multiply_matrix <= 1'b0;
 			load_matrix <= 1'b0;
 			add <= 1'b0;
 			done <= 1'b0;
 		end
 		
 		Multiply: begin
-			entry_count <= entry_count + 1'b1;
+			multiply_matrix <= 1'b1;
 			load_matrix <= 1'b1;
 			add <= 1'b0;
 			done <= 1'b0;
 		end
 		
 		Accumulate: begin
-			entry_count <= 1'b0;
+			multiply_matrix <= 1'b0;
 			add <= 1'b1;
 			load_matrix <= 1'b0;
 			done <= 1'b0;
 		end
 		
 		Store: begin
-			entry_count <= 1'b0;
+			multiply_matrix <= 1'b0;
 			load_matrix <= 1'b0;
 			add <= 1'b0;
 			done <= 1'b1;
 		end
 		
 		default: begin
-			entry_count <= 1'b0;
 			load_matrix <= 1'b0;
 			add <= 1'b0;
 			done <= 1'b0;

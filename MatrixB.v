@@ -5,10 +5,12 @@ module MatrixB(
 );
 
 	always@(entry_out) begin
-		if(entry_out < 4) begin
-			element <= (entry_out[0]) ?  (matrixB[11:8]) : (matrixB[3:0]);
-		end else begin
-		element <= (entry_out[0]) ? (matrixB[15:12]) : (matrixB[7:4]);
-		end
+		case(entry_out) 
+		0,4:element <= (matrixB[3:0]);
+		1,5:element <= (matrixB[11:8]);
+		2,6:element <= (matrixB[7:4]);
+		3,7:element <= (matrixB[15:12]);
+		default: element <= 4'b0;
+	       endcase
 	end
 endmodule 

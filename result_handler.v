@@ -9,11 +9,12 @@ module result_handler(
 	always@(posedge reset, posedge done) begin
 		if(reset) begin
 			address = 8'b0000_0000;
-			Q = 8'bxxxxxxxx;
+			Q = 32'bxxxxxxxx;
 		end
-		else
+		else begin
 			Q = D;
 			address = address + 1;
+		end
 	end
 
 endmodule
