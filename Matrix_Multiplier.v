@@ -30,7 +30,7 @@ FSM fsm(.clock(clock), .start(start), .reset(reset), .entry_count(AB_entries),.m
 status_reg statusREG(.clk(clock),.reset(reset),.multiply(multiply_matrix),.entry_out(AB_entries));
 MatrixA mata(.clk(clock),.matrixA(matrix_A), .entry_out(AB_entries), .element(element_A));
 MatrixB matb(.clk(clock),.matrixB(matrix_B), .entry_out(AB_entries), .element(element_B));
-matrix_multiplication multiplier(.in_mat1(element_A), .in_mat2(element_B), .out_mat(multiply_out));
+Multiplier multiplier(.in_mat1(element_A), .in_mat2(element_B), .out_mat(multiply_out));
 RegFile regfile(.reset(reset),.clk(clock), .product_in(multiply_out), .reg_specifier(AB_entries), .update_reg(write), .contents(regfile_contents)); // TODO:
 matrix_addition accumulator(.matrix(regfile_contents), .matrix_result(adder_result));
 result_handler result_handler(.D(adder_result), .reset(reset), .done(addition_done), .Q(matrix_result), .address(matrix_count));
