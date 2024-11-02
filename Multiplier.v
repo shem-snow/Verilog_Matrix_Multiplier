@@ -4,12 +4,12 @@ module Multiplier #(
 //This does our necessary multiplication, turning the matrices to just be
 //the final number
 (	 
-    input wire [DATA_WIDTH-1:0] in_mat1,
-    input wire [DATA_WIDTH-1:0] in_mat2,
-    output reg [DATA_WIDTH+3:0] out_mat
+   input wire [DATA_WIDTH-1:0] elementA,
+   input wire [DATA_WIDTH-1:0] elementB,
+   output reg [DATA_WIDTH+3:0] multiply_out
 );
 	
-	 reg [DATA_WIDTH*2-1:0] in_mat1_ext;
+    reg [DATA_WIDTH*2-1:0] in_mat1_ext;
     reg [DATA_WIDTH*2-1:0] in_mat2_ext;
     reg [DATA_WIDTH*4-1:0] full_product;
 
