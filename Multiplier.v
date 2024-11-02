@@ -9,7 +9,7 @@ module Multiplier #(
     output reg [DATA_WIDTH+3:0] out_mat
 );
 	
-   reg [DATA_WIDTH*2-1:0] in_mat1_ext;
+	 reg [DATA_WIDTH*2-1:0] in_mat1_ext;
     reg [DATA_WIDTH*2-1:0] in_mat2_ext;
     reg [DATA_WIDTH*4-1:0] full_product;
 

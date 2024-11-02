@@ -1,15 +1,19 @@
+/*
+*Moudle: Matrix Addition
+*Purpose: Adds the corresponding elements 
+* to compute the correct elements for the final 2x2 matrix
+*/
 module matrix_addition(
-	input [63:0] matrix,
-	output reg [31:0] matrix_result
+	input [47:0] matrix, // 48 bit input unrolled 2x2 matrix (where each element is 6 bits)
+	output reg [23:0] matrix_result // 24 bit 2x2 matrix (where each sum element is 6 bits)
 );
 
-//self explanatory but adds the values in the matrices and puts them into
-//the next matrix
+// Adds corresponding elements in pairs to produce the final summed 2x2 matrix
 always @(*) begin
-	matrix_result[7:0] <= matrix[7:0] + matrix[15:8];
-	matrix_result[15:8] <=  matrix[31:24] + matrix[23:16];
-	matrix_result[23:16] <= matrix[39:32] + matrix[47:40];
-	matrix_result[31:24] <= matrix[55:48] + matrix[63:56];
+	matrix_result[5:0] <=  matrix[11:6] + matrix[5:0];
+	matrix_result[11:6] <=  matrix[23:18] + matrix[17:12];
+	matrix_result[17:12] <= matrix[35:30] + matrix[29:24];
+	matrix_result[23:18] <= matrix[47:42] + matrix[41:36];
 end
 
 endmodule
