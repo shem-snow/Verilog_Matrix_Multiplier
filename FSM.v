@@ -37,14 +37,14 @@ always@(current_state,entry_count,start) begin
 				if(start)
 					next_state <= Multiply;
 				else
-					 ;// latch
+					next_state <= Idle;
 			end
 		
 			Multiply: begin
 				if(entry_count == 4'd7) begin // 8
 					next_state <= Accumulate;
 				end else begin
-					 next_state <= Multiply;// latch
+					 next_state <= Multiply;
 				end
 			end
 		
