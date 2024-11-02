@@ -7,8 +7,9 @@ All the Verilog files.
  4. FSM.v
  5. matrix_addition.v
  6. Matrix_Multiplier.v
- 7. MatrixA.v
- 8. MatrixB.v
- 9. RegFile.v
- 10. result_handler.v
- 11. tb_Matrix_multiplication.v
+ 7. Multiplier.v
+ 8. MatrixA.v
+ 9. MatrixB.v
+ 10. RegFile.v
+ 11. result_handler.v
+ 12. tb_Matrix_multiplication.v
