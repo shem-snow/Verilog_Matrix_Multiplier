@@ -19,7 +19,7 @@ always@(negedge clk) begin
 		1,3: begin element <= (matrixA[5:3]); end 
 		4,6: begin element <= (matrixA[8:6]); end 
 		5,7: begin element <= (matrixA[11:9]); end 
-		default: begin  element <= 4'b0; end 
+		default: begin  element <= 3'b0; end 
 	 endcase
 end
 

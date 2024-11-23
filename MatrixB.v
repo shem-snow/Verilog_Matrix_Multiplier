@@ -19,7 +19,7 @@ always@(negedge clk) begin
 		1,5:element <= (matrixB[8:6]);
 		2,6:element <= (matrixB[5:3]);
 		3,7:element <= (matrixB[11:9]);
-		default: element <= 4'b0;
+		default: element <= 3'b0;
 	endcase
 end
 
